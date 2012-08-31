@@ -3,15 +3,13 @@ header#header
   .navbar.navbar-fixed-top(role='navigation')
     .navbar-inner
       .container
-        a.brand(href='/') Node.js Express Mongoose Demo
+        a.brand(href='/') Photohub
         .nav-collapse.collapse
           ul.nav
             li
-              a(href='/articles', title="article listing") Articles
+              a(href='/albums', title="album listing") Albums
             li
-              a(href="/articles/new", title="new article") New
-            li
-              a(href="https://github.com/madhums/nodejs-express-mongoose-demo", title="fork me on github") FORK ME ON GITHUB
+              a(href="/albums/new", title="new album") New
           ul.nav.pull-right
             if (everyauth.loggedIn)
               li
@@ -20,4 +18,13 @@ header#header
                 a(href="/logout", title="logout") Logout
             else
               li
-                a(href="/auth/facebook", title="Login") Login
+                a(href="/login", title="Login") Login
+              li
+                a(href="/register", title="Register") Register
+              li
+                a(href="/auth/facebook", title="Login with Facebook") Use Facebook
+              li
+                a(href="/auth/twitter", title="Login with Twitter") Use Twitter
+              li
+                a(href="/auth/google", title="Login with Google") Use Google
+

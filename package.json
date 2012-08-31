@@ -1,12 +1,12 @@
 {
-    "name": "noobjs"
-  , "description": "A demo app in nodejs illustrating use of express, jade and mogoose"
-  , "version": "2.2.0"
+    "name": "photohubjs"
+  , "description": "PhotoHub app in nodejs using express, jade and mogoose"
+  , "version": "0.0.1"
   , "private": true
-  , "author": "Madhusudhan M S (http://github.com/madhums)"
+  , "author": "Almecija R S (http://github.com/sheniff)"
   , "engines": {
-        "node": "0.6.18"
-      , "npm": "1.1.9"
+        "node": "0.8.8"
+      , "npm": "1.1.59"
     }
   , "scripts": {
       "start": "./node_modules/.bin/nodemon app.js"
@@ -19,7 +19,7 @@
     , "yaml-config" : "0.1.0"
     , "connect-mongodb" : "1.1.2"
     , "mongoose-auth" : "0.0.11"
-    , "everyauth" : "0.2.29"
+    , "everyauth" : "0.3.0"
     , "nodemon": "latest"
   }
 }

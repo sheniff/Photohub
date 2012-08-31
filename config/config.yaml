@@ -1,10 +1,13 @@
 development:
   db:
-    uri: "mongodb://localhost/noobjs_development"
+    uri: "mongodb://localhost/photohub"
   facebook:
     appId: "363663163645036"
     appSecret: "9c3c0bde2389f7ec7ccfaeba3b49ec32"
     host_uri: "http://localhost:3000"
+  twitter:
+    consumerKey: ""
+    consumerSecret: ""
 staging:
   db:
     uri: "mongodb://localhost/noobjs_staging"

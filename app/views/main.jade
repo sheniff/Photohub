@@ -1,0 +1,9 @@
+!= messages()
+
+h1 Welcome to PhotoHub!!
+
+div#albums
+  - if(everyauth.loggedIn)
+    .welcome Welcome {current_user.name}!
+  - else
+    .welcome.notloggedin You are not logged in

@@ -1,0 +1,8 @@
+.album
+  a.title(href='/albums/'+album._id, title=album.title) #{album.title}
+  p.author
+    span Author :&nbsp;
+    a(href="/profile/"+album.user._id)=album.user.fb.name.full
+  p=album.body
+  span.date
+    #{dateformat(album.created_at, "%b %d, %Y at %I:%M %p")}
