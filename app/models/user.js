@@ -23,6 +23,8 @@ everyauth.debug = true
 /*** FACEBOOK / TWITTER / LOGIN & PASS *****/
 /*******************************************/
 
+/// FACEBOOK CONFIG PARAMS
+
 // This is how you request permissions
 everyauth.facebook.scope('email, user_about_me, user_location')
 
@@ -31,6 +33,12 @@ everyauth.facebook.moduleTimeout(-1)
 
 // To see all the configurable options
 // console.log(everyauth.facebook.configurable())
+
+/// TWITTER CONFIG PARAMS
+
+
+/// LOGIN & PASS CONFIG PARAMS
+
 
 UserSchema.add({
     bio: String
@@ -66,7 +74,8 @@ UserSchema.plugin(mongooseAuth, {
               if (foundUser) {
                 return promise.fulfill(foundUser)
               }
-              console.log("CREATING")
+              
+              console.log("Not found... CREATING")
 
               var expiresDate = new Date
               expiresDate.setSeconds(expiresDate.getSeconds() + accessTokExtra)
