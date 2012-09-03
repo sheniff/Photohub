@@ -6,8 +6,8 @@ development:
     appSecret: "9c3c0bde2389f7ec7ccfaeba3b49ec32"
     host_uri: "http://localhost:3000"
   twitter:
-    consumerKey: ""
-    consumerSecret: ""
+    consumerKey: "pYu6wFiWZQL4IeX6grICSg"
+    consumerSecret: "4SR2Vjt7AJ49FPfpXnTiAUCTFeXvJI1eby3v98Q8s"
 staging:
   db:
     uri: "mongodb://localhost/noobjs_staging"
