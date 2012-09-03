@@ -23,23 +23,19 @@ everyauth.debug = true
 /*** FACEBOOK / TWITTER / LOGIN & PASS *****/
 /*******************************************/
 
-/// FACEBOOK CONFIG PARAMS
-
 // This is how you request permissions
-everyauth.facebook.scope('email, user_about_me')
+everyauth.facebook.scope('email, user_about_me');
 
 // Eleminate timeout completely
-everyauth.facebook.moduleTimeout(-1)
+everyauth.facebook.moduleTimeout(-1);
 
 // To see all the configurable options
 // console.log(everyauth.facebook.configurable())
 
-// everyauth.everymodule.findUserById( function(userId, callback){
-
-// });
-
+// ENUM: Account types
 var AccountType = "free premium superadmin".split(" ");
 
+// USER Model
 UserSchema.add({
   email: String,
   name: {
@@ -51,16 +47,7 @@ UserSchema.add({
   created_at: {type : Date, default : Date.now}
 });
 
-
-// everyauth.everymodule.findUserById (function(id,callback){
-//   console.log("AAAAAAAAAAAAAAGGHHHH ", id);
-//   User.findById(id, function(err, user) {
-//     if(err) return callback(err);
-//     callback(null, user);
-//   });
-// });
-
-
+// Access methods
 UserSchema.plugin(mongooseAuth, {
   everymodule: {
     everyauth: {
@@ -197,16 +184,8 @@ var assignTwDataToUser = function (user, accessTok, accessTokSecret, twUser) {
   user.twit.name = twUser.screen_name;
 };
 
-// validations
+// validations (ToDo, if necessary)
 
-UserSchema.path('fb.name.full').validate(function (name) {
-  return name.trim().split(' ').length >= 2
-}, 'Please provide your fullname')
-
-UserSchema.path('fb.email').validate(function (email) {
-  return /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/i.test(email)
-}, 'Please provide a proper email')
 
 // virtual attributes
-
 var exports = module.exports = User = mongoose.model('User', UserSchema);
