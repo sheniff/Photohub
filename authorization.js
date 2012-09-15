@@ -6,7 +6,7 @@
 exports.requiresLogin = function (req, res, next) {
   if (!req.loggedIn) {
     req.flash('notice', 'You are not authorized. Please login')
-    res.redirect('/articles')
+    res.redirect('/')
   }
   next()
 };
@@ -31,11 +31,11 @@ exports.user = {
  *  Article authorizations routing middleware
  */
 
-exports.article = {
+exports.album = {
     hasAuthorization : function (req, res, next) {
-      if (req.article.user._id.toString() != req.user._id.toString()) {
+      if (req.album.user._id.toString() != req.user._id.toString()) {
         req.flash('notice', 'You are not authorized');
-        res.redirect('/article/'+req.article.id);
+        res.redirect('/album/'+req.album.id);
       }
       next()
     }

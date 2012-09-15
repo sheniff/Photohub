@@ -1,114 +1,127 @@
-var Article = mongoose.model('Article')
-  , Comment = mongoose.model('Comment')
+var Album = mongoose.model('Album')
 
 module.exports = function(app, auth){
 
-  // New article
-  app.get('/articles/new', auth.requiresLogin, function(req, res){
-    res.render('articles/new', {
-      title: 'New Article',
-      article: new Article({})
+  // New album
+  app.get('/albums/new', auth.requiresLogin, function(req, res){
+    var a = new Album({});
+    console.log("New album!! ", a);
+    res.render('albums/new', {
+      title: 'New Album',
+      album: new Album({})
     })
   })
 
   app.param('id', function(req, res, next, id){
-    Article
+    console.log("looking for user for id: ", req.params.id, id);
+    Album
       .findOne({ _id : req.params.id })
-      .populate('user')
-      .run(function(err,article) {
+      //.populate('user')
+      .exec(function(err,album) {
         if (err) return next(err)
-        if (!article) return next(new Error('Failed to load article ' + id))
-        req.article = article
-        Comment
-          .find({article : req.article})
-          .populate('user')
-          .run(function (err, comments) {
-            if (err) throw err
-            req.comments = comments
-            next()
-          })
+        if (!album) return next(new Error('Failed to load album ' + id))
+        console.log("Looking...");
+        req.album = album
+        console.log("Found!", req.album);
+        // Comment
+        //   .find({album : req.album})
+        //   .populate('user')
+        //   .run(function (err, comments) {
+        //     if (err) throw err
+        //     req.comments = comments
+        //     next()
+        //   })
       })
   })
 
-  // Create an article
-  app.post('/articles', function(req, res){
-    var article = new Article(req.body.article)
-    article.user = req.session.auth.userId
+  // Create an album
+  app.post('/albums', function(req, res){
+    console.log("Creando álbum con body: ", req.body);
+    var album = new Album(req.body.album)
+    //album.user = req.session.auth.userId
 
-    article.save(function(err){
+    var user = {
+      id: req.session.auth.userId,
+      rol: 'god',
+      enroll_date: Date.now()
+    };
+
+    album.users.push(user);
+
+    console.log("Saving!", album);
+
+    album.save(function(err){
       if (err) {
         utils.mongooseErrorHandler(err, req)
-        res.render('articles/new', {
-            title: 'New Article'
-          , article: article
+        res.render('albums/new', {
+            title: 'New Album'
+          , album: album
         })
       }
       else {
         req.flash('notice', 'Created successfully')
-        res.redirect('/article/'+article._id)
+        res.redirect('/album/'+album._id)
       }
     })
   })
 
-  // Edit an article
-  app.get('/article/:id/edit', auth.requiresLogin, auth.article.hasAuthorization, function(req, res){
-    res.render('articles/edit', {
-      title: 'Edit '+req.article.title,
-      article: req.article
+  // Edit an album
+  app.get('/album/:id/edit', auth.requiresLogin, auth.album.hasAuthorization, function(req, res){
+    res.render('albums/edit', {
+      title: 'Edit '+req.album.title,
+      album: req.album
     })
   })
 
-  // Update article
-  app.put('/articles/:id', auth.requiresLogin, auth.article.hasAuthorization, function(req, res){
-    var article = req.article
+  // Update album
+  app.put('/albums/:id', auth.requiresLogin, auth.album.hasAuthorization, function(req, res){
+    var album = req.album
 
-    article.title = req.body.article.title
-    article.body = req.body.article.body
+    album.title = req.body.album.title
+    album.body = req.body.album.body
 
-    article.save(function(err, doc) {
+    album.save(function(err, doc) {
       if (err) {
         utils.mongooseErrorHandler(err, req)
-        res.render('articles/edit', {
-            title: 'Edit Article'
-          , article: article
+        res.render('albums/edit', {
+            title: 'Edit Album'
+          , album: album
         })
       }
       else {
         req.flash('notice', 'Updated successfully')
-        res.redirect('/article/'+article._id)
+        res.redirect('/album/'+album._id)
       }
     })
   })
 
-  // View an article
-  app.get('/article/:id', function(req, res){
-    res.render('articles/show', {
-      title: req.article.title,
-      article: req.article,
-      comments: req.comments
-    })
+  // View an album
+  app.get('/album/:id', function(req, res){
+    console.log("WAAAGHHH!!");
+    console.log("Trying to render", req.album);
+    res.render('albums/show', {});
   })
 
-  // Delete an article
-  app.del('/article/:id', auth.requiresLogin, auth.article.hasAuthorization, function(req, res){
-    var article = req.article
-    article.remove(function(err){
+  // Delete an album
+  app.del('/album/:id', auth.requiresLogin, auth.album.hasAuthorization, function(req, res){
+    var album = req.album
+    album.remove(function(err){
       // req.flash('notice', 'Deleted successfully')
-      res.redirect('/articles')
+      res.redirect('/albums')
     })
   })
 
-  // Listing of Articles
-  app.get('/articles', function(req, res){
-    Article
+  // Listing of Albums
+  app.get('/albums', function(req, res){
+    Album
       .find({})
       .populate('user')
       .desc('created_at') // sort by date
-      .run(function(err, articles) {
+      .run(function(err, albums) {
         if (err) throw err
-        res.render('articles/index', {
-          title: 'List of Articles',
-          articles: articles
+        res.render('albums/index', {
+          title: 'List of Albums',
+          albums: albums
         })
       })
   })
