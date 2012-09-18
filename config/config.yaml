@@ -10,15 +10,15 @@ development:
     consumerSecret: "4SR2Vjt7AJ49FPfpXnTiAUCTFeXvJI1eby3v98Q8s"
 staging:
   db:
-    uri: "mongodb://localhost/noobjs_staging"
+    uri: 
   facebook:
-    appId: "202263326537254"
-    appSecret: "f12d943a863da7bd6d27823355769ec5"
-    host_uri: "http://localhost:3000"
+    appId: 
+    appSecret: 
+    host_uri: 
 production:
   db:
-    uri: "mongodb://madhums:madhums@staff.mongohq.com:10097/app2695805"
+    uri: 
   facebook:
-    appId: "202263326537254"
-    appSecret: "f12d943a863da7bd6d27823355769ec5"
-    host_uri: "http://nodejs-express-demo.herokuapp.com"
+    appId: 
+    appSecret: 
+    host_uri: 
