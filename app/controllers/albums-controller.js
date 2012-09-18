@@ -21,14 +21,14 @@ module.exports = function(app, auth){
         if (!album) return next(new Error('Failed to load album ' + id))
 
         req.album = album
-        req.album.users = []
+        req.album.users = {}
         // Finding users
         Album2User
           .find({ album : album })
           .populate('user')
           .exec(function(err, rels){
             rels.forEach(function(rel){
-              req.album.users.push(rel.user);
+              req.album.users[rel.user._id.toString()] = rel;
             })
             // console.log("Found!", req.album, req.album.users);
             next();
@@ -37,7 +37,7 @@ module.exports = function(app, auth){
   })
 
   // Create an album
-  app.post('/albums', function(req, res){
+  app.post('/albums', auth.requiresLogin, function(req, res){
 
     var album = new Album(req.body.album);
 
@@ -98,9 +98,10 @@ module.exports = function(app, auth){
     })
   })
 
-  // View an album
-  app.get('/album/:id', function(req, res){
-    // console.log("Trying to render", req.album);
+  // Show an album
+  app.get('/album/:id', auth.requiresLogin, function(req, res){
+    console.log("Trying to render", req.album.users);
+    console.log(req.album.users);
     res.render('albums/show', {
       title: req.album.title,
       album: req.album
@@ -124,11 +125,7 @@ module.exports = function(app, auth){
       .populate('album')
       .run(function(err, albums) {
 
-        console.log("Yohooo!!");
-        console.log(albums);
-        
         if (err) throw err;
-
         res.render('albums/index', {
           title: 'List of Albums',
           albums: albums

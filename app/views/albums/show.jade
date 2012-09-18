@@ -2,15 +2,14 @@
 
 h2= album.title
 p.users
-  span Users :&nbsp;
+  span Users : 
   != partial('../users/list', {collection: album.users, as: 'user'})
 p=album.description
 span.date
   #{dateformat(album.created_at, "%b %d, %Y at %I:%M %p")}
 
-p
-  br
-  a.btn(href='/album/'+album._id+'/edit', title="edit") Edit
-  &nbsp;
-  a.btn.destroy(href='/album/'+album._id, title="delete") Delete
-  &nbsp;
+unless album.users[everyauth.user._id].rol == 'tree'
+  p
+    br
+    a.btn(href='/album/'+album._id+'/edit', title="edit") Edit
+    a.btn.destroy(href='/album/'+album._id, title="delete") Delete

@@ -1,4 +1,3 @@
-
 /*
  *  Generic require login routing middleware
  */
@@ -33,7 +32,7 @@ exports.user = {
 
 exports.album = {
     hasAuthorization : function (req, res, next) {
-      if (req.album.user._id.toString() != req.user._id.toString()) {
+      if (req.album.users[req.session.auth.userId].rol === 'tree') {
         req.flash('notice', 'You are not authorized');
         res.redirect('/album/'+req.album.id);
       }
