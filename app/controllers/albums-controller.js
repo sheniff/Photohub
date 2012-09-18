@@ -99,7 +99,7 @@ module.exports = function(app, auth){
   })
 
   // Show an album
-  app.get('/album/:id', auth.requiresLogin, function(req, res){
+  app.get('/album/:id', function(req, res){
     console.log("Trying to render", req.album.users);
     console.log(req.album.users);
     res.render('albums/show', {
