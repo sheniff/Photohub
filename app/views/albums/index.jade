@@ -2,9 +2,9 @@
 
 h2= title
 
-div#articles
-  - if(articles.length)
-    != partial('article_list', {collection : articles, as : 'article'})
+div#albums
+  - if(albums && albums.length)
+    != partial('album_list', {collection : albums, as : 'album'})
   - else
-    #no-results No articles found. Create one
-      a(href="/articles/new") &nbsp;here
+    #no-results No albums found. Create one
+      a(href="/albums/new") &nbsp;here
