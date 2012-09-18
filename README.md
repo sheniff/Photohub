@@ -121,7 +121,7 @@ There are a lot of things you can do with MongoDB, but I'm not wasting my time o
 
 Resources
 ---------
-[Free Git & GitHub course](http://try.github.com/)
-[Paid NodeJS course](http://www.codeschool.com/courses/real-time-web-with-nodejs). There must be a lot of free courses out there!
-[How to organize NodeJS app](http://madhums.tumblr.com/post/27521420404/breaking-down-app-js-file-nodejs-express-mongoose). I used this post to structure the application and learn how to mix some amazing node modules
-[Useful slides about how to write RESTful services using NodeJS](https://speakerdeck.com/u/jakobmattsson/p/writing-restful-web-services-using-nodejs)
+  * [Free Git & GitHub course](http://try.github.com/)
+  * [Paid NodeJS course](http://www.codeschool.com/courses/real-time-web-with-nodejs). There must be a lot of free courses out there!
+  * [How to organize NodeJS app](http://madhums.tumblr.com/post/27521420404/breaking-down-app-js-file-nodejs-express-mongoose). I used this post to structure the application and learn how to mix some amazing node modules
+  * [Useful slides about how to write RESTful services using NodeJS](https://speakerdeck.com/u/jakobmattsson/p/writing-restful-web-services-using-nodejs)
